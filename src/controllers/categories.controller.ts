@@ -52,5 +52,26 @@ export default {
     }
   },
 
+  async update(req: Request, res: Response) {
+    try {
+        const result = await CategoriesModel.findOneAndUpdate(
+            {_id: req.params.id},
+            req.body,
+            {
+                new: true,
+            }
+        )
 
+        res.status(200).json({
+            data: result,
+            message: "Success update category"
+        })
+    } catch (error) {
+        const err = error as Error
+        res.status(500).json({
+            data: err.message,
+            message: "Failed update category"
+        })
+    }
+  }
 };
