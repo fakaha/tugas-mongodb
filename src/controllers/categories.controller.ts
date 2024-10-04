@@ -36,42 +36,61 @@ export default {
 
   async findOne(req: Request, res: Response) {
     try {
-        const result = await CategoriesModel.findOne({
-            _id: req.params.id
-        })
-        res.status(200).json({
-            data: result,
-            message: "Success get one category"
-        })
+      const result = await CategoriesModel.findOne({
+        _id: req.params.id,
+      });
+      res.status(200).json({
+        data: result,
+        message: "Success get one category",
+      });
     } catch (error) {
-        const err = error as Error
-        res.status(500).json({
-            data: err.message,
-            message: "Failed get one category"
-        })
+      const err = error as Error;
+      res.status(500).json({
+        data: err.message,
+        message: "Failed get one category",
+      });
     }
   },
 
   async update(req: Request, res: Response) {
     try {
-        const result = await CategoriesModel.findOneAndUpdate(
-            {_id: req.params.id},
-            req.body,
-            {
-                new: true,
-            }
-        )
+      const result = await CategoriesModel.findOneAndUpdate(
+        { _id: req.params.id },
+        req.body,
+        {
+          new: true,
+        }
+      );
 
-        res.status(200).json({
-            data: result,
-            message: "Success update category"
-        })
+      res.status(200).json({
+        data: result,
+        message: "Success update category",
+      });
     } catch (error) {
-        const err = error as Error
-        res.status(500).json({
-            data: err.message,
-            message: "Failed update category"
-        })
+      const err = error as Error;
+      res.status(500).json({
+        data: err.message,
+        message: "Failed update category",
+      });
     }
-  }
+  },
+
+  async delete(req: Request, res: Response) {
+    try {
+      const result = await CategoriesModel.findOneAndDelete({
+        _id: req.params.id,
+      });
+
+      res.status(200).json({
+        data: result,
+        message: "Success delete category",
+      });
+    } catch (error) {
+      const err = error as Error;
+      res.status(500).json({
+        data: err.message,
+        message: "Failed delete category",
+      });
+    }
+  },
 };
