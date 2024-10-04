@@ -33,4 +33,24 @@ export default {
       });
     }
   },
+
+  async findOne(req: Request, res: Response) {
+    try {
+        const result = await CategoriesModel.findOne({
+            _id: req.params.id
+        })
+        res.status(200).json({
+            data: result,
+            message: "Success get one category"
+        })
+    } catch (error) {
+        const err = error as Error
+        res.status(500).json({
+            data: err.message,
+            message: "Failed get one category"
+        })
+    }
+  },
+
+
 };
